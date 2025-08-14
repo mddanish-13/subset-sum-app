@@ -214,12 +214,11 @@ def make_excel_download(df_long, df_wide):
 
 
 # ----------------------------- UI -----------------------------
-with st.sidebar:
-    st.header("Input")
-    src = st.radio("Choose input method", ["Upload CSV/Excel", "Paste comma-separated"])
-    k = st.number_input("How many combinations do you want?", min_value=1, max_value=20, value=2, step=1,
-                        help="We return the 'best' (fewest items) first, then additional distinct combos.")
-    st.info("Tip: Integers are fastest. Decimals are supported (we scale internally).", icon="💡")
+# Input method selection (moved to main area, under title)
+st.header("Input")
+src = st.radio("Choose input method", ["Upload CSV/Excel", "Paste comma-separated"])
+
+st.info("Tip: Integers are fastest. Decimals are supported (we scale internally).", icon="💡")
 
 numbers = []
 
@@ -238,11 +237,15 @@ else:
     if txt.strip():
         numbers = clean_numbers([x.strip() for x in txt.split(",")])
 
-c1, c2 = st.columns(2)
+# Target sum and controls in columns
+c1, c2, c3 = st.columns([2, 2, 2])
 with c1:
     target = st.number_input("Target sum", value=10.0, step=1.0)
 with c2:
-    st.write("")  # spacing
+    k = st.number_input("Number of combinations", min_value=1, max_value=20, value=2, step=1,
+                        help="We return the 'best' (fewest items) first, then additional distinct combos.")
+with c3:
+    st.write("")  # spacing for alignment
     run = st.button("Find combinations", type="primary")
 
 if run:
