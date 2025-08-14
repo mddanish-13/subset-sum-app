@@ -14,4 +14,4 @@ pip install -r requirements.txt
 streamlit run subset_app.py
 
 ## Deployed
-Deployed on Streamlit Community Cloud.
+Deployed on Streamlit Community Cloud on 15th August 2025 Morning 4.30.
